@@ -1,6 +1,9 @@
 name: Run web scraper
 
-on: [workflow_dispatch]
+on: 
+    workflow_dispatch:
+    schedule:
+        -   cron: "0 8 * * *"   
 
 jobs: 
     build:
@@ -31,7 +34,7 @@ jobs:
                 id: auto-commit-action
 
             -   name: Send Email
-                if: True
+                if: steps.auto-commit-action.outputs.changes_detected == 'true'
                 uses: dawidd6/action-send-mail@v3
                 with:
                     server_address: smtp.gmail.com
