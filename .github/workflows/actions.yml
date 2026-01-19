@@ -1,0 +1,47 @@
+name: Run web scraper
+
+on: [workflow_dispatch]
+
+jobs: 
+    build:
+        runs-on: ubuntu-latest
+        steps:
+
+            -   name: Checkout Repository
+                uses: actions/checkout@v4
+
+            -   name: Setup Python
+                uses: actions/setup-python@v5
+                with:
+                    python-version: "3.9"
+
+            -   name: Install Python Packages
+                run: |
+                    python -m pip install --upgrade pip
+                    pip install requests
+
+            -   name: Execute Script
+                run: python main.py
+
+            -   name: Commit Changes
+                uses: stefanzweifel/git-auto-commit-action@v5
+                with:
+                    commit_message: Update jobs.md
+                    file_pattern: jobs.md
+                id: auto-commit-action
+
+            -   name: Send Email
+                if: steps.auto-commit-action.outputs.changes_detected == 'true'
+                uses: dawid66/action-send-mail@v3
+                with:
+                    server_address: smtp.gmail.com
+                    server_port: 465
+                    username: ${{secrets.MAIL_USERNAME}}
+                    password: ${{secrets.MAIL_PASSWORD}}
+                    subject: 'EUSPA new Jobs openings'
+                    to: slajs.ondrej@gmail.com
+                    from: EUSPA job scraper
+                    body: file://jobs.md
+                    convert_markdown: true
+
+
