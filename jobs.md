@@ -6,3 +6,10 @@
 - **Deadline:** 10.03.2026 11:59 AM
 - **Status:** Open for applications
 - **Detail:** https://vacancies.euspa.europa.eu/Jobs/VacancyDetails/1859
+
+## Financial Officer
+- **Reference:** EUSPA/2026/AD/003
+- **Místo:** Prague / Czech Republic
+- **Deadline:** 24.03.2026 11:59 AM
+- **Status:** Open for applications
+- **Detail:** https://vacancies.euspa.europa.eu/Jobs/VacancyDetails/1863
